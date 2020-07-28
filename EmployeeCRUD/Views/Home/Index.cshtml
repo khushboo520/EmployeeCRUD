@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EmployeeCRUD.Models.Employee>
+
+@{
+    Layout = "_Layout";
+    var title = "READ Employee";
+    ViewData["Title"] = title;
+}
+
+<h2>@title</h2>
+
+<h3><a asp-action="Create" class="btn btn-sm btn-secondary">Create</a></h3>
+<table class="table table-bordered table-sm table-striped">
+    <thead>
+        <tr>
+            <th>EmployeeId</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>EmailId</th>
+            <th>Education</th>
+            <th>YearsOfExperience</th>
+            <th>Salary</th>
+         
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null)
+        {
+            <tr><td colspan="7" class="text-center">No Model Data</td></tr>
+
+        }
+        else
+        {
+            @foreach (var p in Model)
+            {
+    <tr>
+        <td>@p.EmployeeId</td>
+        <td>@p.FirstName</td>
+        <td>@p.LastName</td>
+        <td>@p.EmailId</td>
+        <td>@p.Education</td>
+        <td>@p.YearsOfExperience</td>
+
+        <td>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", p.Salary)</td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Create", new { id = @p.EmployeeId })
+    </td>
+    <td>
+        @Html.ActionLink("Delete", "Delete", new { id = @p.EmployeeId })
+
+    </td>
+    </tr>
+
+            }
+        }
+    </tbody>
+</table>  
